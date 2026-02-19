@@ -1,4 +1,17 @@
+import { motion } from "framer-motion";
 import homeBg from "../assets/home-bg.jpg";
+
+// 6-point polygon: rectangle (vertical elongated) → hexagon for smooth morph
+const CLIP_RECTANGLE =
+  "polygon(25% 0%, 75% 0%, 75% 100%, 25% 100%, 25% 100%, 25% 0%)";
+const CLIP_HEXAGON =
+  "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)";
+
+const TRANSFORM_FINAL =
+  "translate(-50%, -50%) rotate(-30deg) skewY(30deg) scaleX(0.7) scaleY(1.3)";
+
+const DURATION = 3.2;
+const EASE_SMOOTH = [0.33, 0.66, 0.5, 1] as const;
 
 export default function Home() {
   return (
@@ -19,14 +32,35 @@ export default function Home() {
         aria-hidden
       />
 
-      {/* Sharp hexagon "window": reference geometry — vw sizing + rotate/skew/scale */}
-      <div
-        className="absolute left-1/2 top-1/2 overflow-hidden opacity-70 lg:w-[38vw] lg:h-[25vw] w-[40vw] h-[27vw] min-w-[280px] min-h-[180px]"
-        style={{
-          transform:
-            "translate(-50%, -50%) rotate(-30deg) skewY(30deg) scaleX(0.7) scaleY(1.3)",
-          clipPath:
-            "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
+      {/* Full-screen dark overlay: fades out so "everything is dark" at start */}
+      <motion.div
+        className="absolute inset-0 bg-black pointer-events-none z-[1]"
+        initial={{ opacity: 1 }}
+        animate={{ opacity: 0 }}
+        transition={{
+          duration: 1.6,
+          ease: EASE_SMOOTH,
+          delay: 0.2,
+        }}
+        aria-hidden
+      />
+
+      {/* Window: starts dark as rectangle, fades in, then morphs to hexagon */}
+      <motion.div
+        className="absolute left-1/2 top-1/2 overflow-hidden lg:w-[38vw] lg:h-[25vw] w-[40vw] h-[27vw] min-w-[280px] min-h-[180px] z-[2]"
+        initial={{
+          clipPath: CLIP_RECTANGLE,
+          transform: TRANSFORM_FINAL,
+          opacity: 0,
+        }}
+        animate={{
+          clipPath: [CLIP_RECTANGLE, CLIP_RECTANGLE, CLIP_HEXAGON],
+          opacity: [0, 0.65, 0.7],
+        }}
+        transition={{
+          duration: DURATION,
+          times: [0, 0.38, 1],
+          ease: EASE_SMOOTH,
         }}
       >
         <div
@@ -38,7 +72,7 @@ export default function Home() {
           }}
           aria-hidden
         />
-      </div>
+      </motion.div>
 
       {/* Headline: two parts around the hexagon */}
       <div className="relative z-10 flex flex-col md:flex-row md:flex-wrap items-center justify-center min-h-[calc(100vh-4rem)] px-6 gap-2 md:gap-4">
