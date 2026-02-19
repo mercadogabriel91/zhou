@@ -1,6 +1,6 @@
+import { NavLink } from "react-router-dom";
 import { useTheme } from "../contexts/ThemeContext";
-
-const navLinks = ["Thing 1", "Thing 2", "Thing 3", "Thing 4", "Thing 5", "Thing 6"];
+import { routes } from "../routes";
 
 export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
@@ -9,24 +9,30 @@ export default function Navbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 bg-white/80 dark:bg-neutral-950/80 backdrop-blur-sm border-b border-neutral-200/80 dark:border-white/5">
       {/* Logo */}
-      <a href="/">
+      <NavLink to="/">
         <img
           src="/src/assets/yin-yang.png"
           alt="Logo"
           className="h-6 w-6 object-contain dark:invert"
         />
-      </a>
+      </NavLink>
 
       {/* Nav links */}
       <nav className="hidden md:flex items-center gap-8">
-        {navLinks.map((link) => (
-          <a
-            key={link}
-            href="#"
-            className="text-[11px] uppercase tracking-widest text-neutral-500 hover:text-neutral-900 dark:text-white/60 dark:hover:text-white transition-colors duration-200"
+        {routes.map(({ path, label }) => (
+          <NavLink
+            key={path}
+            to={path}
+            className={({ isActive }) =>
+              `text-[11px] uppercase tracking-widest transition-colors duration-200 ${
+                isActive
+                  ? "text-neutral-900 dark:text-white"
+                  : "text-neutral-500 hover:text-neutral-900 dark:text-white/60 dark:hover:text-white"
+              }`
+            }
           >
-            {link}
-          </a>
+            {label}
+          </NavLink>
         ))}
       </nav>
 
