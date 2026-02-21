@@ -6,6 +6,7 @@ import {
   useMotionValueEvent,
 } from "framer-motion";
 import homeBg from "../assets/home-bg.jpg";
+import chinaVideo from "../assets/china.mp4";
 
 const CLIP_RECTANGLE =
   "polygon(25% 0%, 75% 0%, 75% 100%, 25% 100%, 25% 100%, 25% 0%)";
@@ -119,10 +120,15 @@ export default function Home() {
   return (
     <main ref={containerRef} className="relative" style={{ height: "200vh" }}>
       <div className="sticky top-0 h-screen overflow-hidden">
-        {/* Full-screen clear image (revealed as blur/gradient fade on scroll) */}
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${homeBg})` }}
+        {/* Full-screen background video (muted, no sound) */}
+        <video
+          className="absolute inset-0 w-full h-full object-cover"
+          src={chinaVideo}
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster={homeBg}
           aria-hidden
         />
 
@@ -133,13 +139,23 @@ export default function Home() {
           aria-hidden
         />
 
-        {/* Blur layer */}
+        {/* Blur layer (same video, blurred) */}
         <motion.div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-110"
-          style={{ backgroundImage: `url(${homeBg})`, filter: "blur(40px)" }}
+          className="absolute inset-0 scale-110"
+          style={{ filter: "blur(40px)" }}
           animate={blurControls}
           aria-hidden
-        />
+        >
+          <video
+            className="absolute inset-0 w-full h-full object-cover"
+            src={chinaVideo}
+            autoPlay
+            muted
+            loop
+            playsInline
+            aria-hidden
+          />
+        </motion.div>
 
         {/* Full-screen dark overlay: fades out at start */}
         <motion.div
@@ -176,11 +192,21 @@ export default function Home() {
               y: "-50%",
             }}
             animate={innerControls}
-          />
+          >
+            <video
+              className="absolute inset-0 w-full h-full object-cover object-center"
+              src={chinaVideo}
+              autoPlay
+              muted
+              loop
+              playsInline
+              aria-hidden
+            />
+          </motion.div>
         </motion.div>
 
         {/* Headline */}
-        <motion.div
+        {/* <motion.div
           className="relative z-10 flex flex-col md:flex-row md:flex-wrap items-center justify-center min-h-screen px-6 gap-2 md:gap-4"
           animate={textControls}
         >
@@ -190,7 +216,7 @@ export default function Home() {
           <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl italic font-light text-white drop-shadow-[0_0_40px_rgba(0,0,0,0.5)] md:ml-[-0.15em]">
             are forged.
           </h1>
-        </motion.div>
+        </motion.div> */}
       </div>
     </main>
   );
