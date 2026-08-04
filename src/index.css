@@ -1,16 +1,33 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
 @theme {
-  --font-serif: 'Cormorant Garamond', serif;
-  --font-sans: 'Inter', sans-serif;
+  --font-serif: "Cormorant Garamond", serif;
+  --font-sans: "DM Sans", sans-serif;
+
+  --color-zhou-bg: #0a0a0a;
+  --color-zhou-surface: #111111;
+  --color-zhou-text: #f2efe8;
+  --color-zhou-muted: #8a857c;
+  --color-zhou-accent: #a68b5b;
+  --color-zhou-line: rgba(242, 239, 232, 0.12);
 }
 
 @layer base {
+  html {
+    background-color: var(--color-zhou-bg);
+    color: var(--color-zhou-text);
+  }
+
   body {
     font-family: var(--font-sans);
+    background-color: var(--color-zhou-bg);
+    color: var(--color-zhou-text);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-zhou-accent) 40%, transparent);
+    color: var(--color-zhou-text);
   }
 }

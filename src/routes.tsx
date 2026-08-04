@@ -1,19 +1,19 @@
 import type { ReactNode } from "react";
+import Contacto from "./pages/Contacto";
 import Home from "./pages/Home";
-import Page from "./pages/Page";
+import Nosotros from "./pages/Nosotros";
+import Practica from "./pages/Practica";
+import Practicas from "./pages/Practicas";
 
 export type RouteConfig = {
   path: string;
-  label: string;
   element: ReactNode;
 };
 
 export const routes: RouteConfig[] = [
-  { path: "/", label: "Home", element: <Home /> },
-  { path: "/thing-1", label: "Thing 1", element: <Page title="Thing 1" /> },
-  { path: "/thing-2", label: "Thing 2", element: <Page title="Thing 2" /> },
-  { path: "/thing-3", label: "Thing 3", element: <Page title="Thing 3" /> },
-  { path: "/thing-4", label: "Thing 4", element: <Page title="Thing 4" /> },
-  { path: "/thing-5", label: "Thing 5", element: <Page title="Thing 5" /> },
-  { path: "/thing-6", label: "Thing 6", element: <Page title="Thing 6" /> },
+  { path: "/", element: <Home /> },
+  { path: "/practicas", element: <Practicas /> },
+  { path: "/practicas/:slug", element: <Practica /> },
+  { path: "/nosotros", element: <Nosotros /> },
+  { path: "/contacto", element: <Contacto /> },
 ];
