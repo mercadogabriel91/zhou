@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import homeBg from "../assets/home-bg.png";
 import chinaVideo from "../assets/china.mp4";
 import koiVideo from "../assets/koi.mp4";
-import FullBleedMedia from "../components/FullBleedMedia";
+import LazyVideo from "../components/LazyVideo";
+import PracticeMedia from "../components/PracticeMedia";
 import Reveal from "../components/Reveal";
 import { useLanguage } from "../contexts/LanguageContext";
 import { practices } from "../data/practices";
@@ -28,15 +29,10 @@ export default function Home() {
     <main>
       {/* Hero */}
       <section className="relative h-svh min-h-[640px] overflow-hidden">
-        <video
-          className="absolute inset-0 h-full w-full object-cover"
+        <LazyVideo
           src={koiVideo}
           poster={homeBg}
-          autoPlay
-          muted
-          loop
-          playsInline
-          aria-hidden
+          className="absolute inset-0 h-full w-full object-cover"
         />
         <div
           className="absolute inset-0 bg-gradient-to-b from-zhou-bg/50 via-zhou-bg/35 to-zhou-bg"
@@ -111,15 +107,10 @@ export default function Home() {
           className="absolute inset-0 opacity-40"
           style={reduceMotion ? undefined : { scale: mediaScale }}
         >
-          <video
-            className="h-full w-full object-cover"
+          <LazyVideo
             src={chinaVideo}
             poster={homeBg}
-            autoPlay
-            muted
-            loop
-            playsInline
-            aria-hidden
+            className="absolute inset-0 h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-zhou-bg/80" aria-hidden />
         </motion.div>
@@ -164,12 +155,7 @@ export default function Home() {
               to={`/practicas/${practice.slug}`}
               className="group relative block h-[42vh] min-h-[280px] overflow-hidden border-t border-zhou-line"
             >
-              <FullBleedMedia
-                src={practice.media}
-                poster={practice.poster}
-                objectPosition={practice.objectPosition}
-                scaleOnHover
-              />
+              <PracticeMedia practice={practice} scaleOnHover />
               <div className="relative z-10 flex h-full items-end justify-between px-6 py-10 md:px-10">
                 <Reveal delay={index * 0.05}>
                   <div>

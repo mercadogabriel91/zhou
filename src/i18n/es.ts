@@ -64,7 +64,7 @@ export const es = {
   "contact.submit": "Enviar",
   "contact.success": "Gracias. Recibimos tu mensaje.",
   "contact.location": "Estudio",
-  "contact.location.value": "Buenos Aires · Por confirmar",
+  "contact.location.value": "Salta · Vaqueros",
   "contact.hours": "Horarios",
   "contact.hours.value": "Consultar disponibilidad",
 

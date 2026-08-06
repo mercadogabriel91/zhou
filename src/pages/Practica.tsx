@@ -1,5 +1,5 @@
 import { Link, Navigate, useParams } from "react-router-dom";
-import FullBleedMedia from "../components/FullBleedMedia";
+import PracticeMedia from "../components/PracticeMedia";
 import Reveal from "../components/Reveal";
 import { useLanguage } from "../contexts/LanguageContext";
 import { getPractice } from "../data/practices";
@@ -16,11 +16,7 @@ export default function Practica() {
   return (
     <main>
       <section className="relative h-[70vh] min-h-[420px] overflow-hidden">
-        <FullBleedMedia
-          src={practice.media}
-          poster={practice.poster}
-          objectPosition={practice.objectPosition}
-        />
+        <PracticeMedia practice={practice} />
         <div className="relative z-10 flex h-full flex-col justify-end px-6 pb-14 md:px-10 md:pb-20">
           <Reveal>
             <Link

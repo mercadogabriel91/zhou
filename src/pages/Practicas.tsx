@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import FullBleedMedia from "../components/FullBleedMedia";
+import PracticeMedia from "../components/PracticeMedia";
 import Reveal from "../components/Reveal";
 import { useLanguage } from "../contexts/LanguageContext";
 import { practices } from "../data/practices";
@@ -27,12 +27,7 @@ export default function Practicas() {
             to={`/practicas/${practice.slug}`}
             className="group relative block h-[55vh] min-h-[320px] overflow-hidden border-t border-zhou-line"
           >
-            <FullBleedMedia
-              src={practice.media}
-              poster={practice.poster}
-              objectPosition={practice.objectPosition}
-              scaleOnHover
-            />
+            <PracticeMedia practice={practice} scaleOnHover />
             <div className="relative z-10 flex h-full flex-col justify-end px-6 py-12 md:flex-row md:items-end md:justify-between md:px-10">
               <Reveal delay={index * 0.04}>
                 <div>
