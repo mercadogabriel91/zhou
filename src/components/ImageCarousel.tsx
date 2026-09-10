@@ -1,8 +1,9 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
+import type { PracticeImage } from "../data/practices";
 
 type ImageCarouselProps = {
-  images: string[];
+  images: PracticeImage[];
   className?: string;
   objectPosition?: string;
   intervalMs?: number;
@@ -34,13 +35,16 @@ export default function ImageCarousel({
     scaleOnHover ? "group-hover:scale-105 group-focus-visible:scale-105" : ""
   }`;
 
+  const positionFor = (slide: PracticeImage) =>
+    slide.objectPosition ?? objectPosition;
+
   if (slides.length === 1 || reduceMotion) {
     return (
       <div className={`absolute inset-0 overflow-hidden ${className}`}>
         <img
           className={mediaClass}
-          style={{ objectPosition }}
-          src={slides[0]}
+          style={{ objectPosition: positionFor(slides[0]) }}
+          src={slides[0].src}
           alt=""
           aria-hidden
         />
@@ -48,14 +52,16 @@ export default function ImageCarousel({
     );
   }
 
+  const slide = slides[index];
+
   return (
     <div className={`absolute inset-0 overflow-hidden ${className}`}>
       <AnimatePresence mode="sync">
         <motion.img
-          key={slides[index]}
+          key={slide.src}
           className={mediaClass}
-          style={{ objectPosition }}
-          src={slides[index]}
+          style={{ objectPosition: positionFor(slide) }}
+          src={slide.src}
           alt=""
           aria-hidden
           initial={{ opacity: 0, scale: 1.04 }}

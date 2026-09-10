@@ -37,6 +37,9 @@ export const es = {
   "practice.taichi.tagline": "Fluidez, equilibrio y paz interior.",
   "practice.taichi.body":
     "El tai chi es meditación en movimiento. Secuencias suaves que armonizan respiración y cuerpo, favoreciendo el equilibrio, la claridad mental y una paz duradera.",
+  "practice.eventos-especiales.name": "Eventos especiales",
+  "practice.eventos-especiales.tagline": "Eventos especiales",
+  "practice.eventos-especiales.body": "Eventos especiales",
   "practice.cta": "Consultar horarios",
   "practice.back": "Todas las prácticas",
 
